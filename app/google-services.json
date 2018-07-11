@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "703711119458-urjul31lktot833jje6fg778h2bpph3d.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "charlesroger.informanet",
+            "certificate_hash": "541337f041968ceae4ff2a54bcfd8176abca0686"
+          }
+        },
+        {
           "client_id": "703711119458-lfedp36tmp6rnivef052lh23mobfmb1i.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,8 +37,13 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "703711119458-lfedp36tmp6rnivef052lh23mobfmb1i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2

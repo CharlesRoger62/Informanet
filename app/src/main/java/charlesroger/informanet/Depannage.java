@@ -8,7 +8,7 @@ import java.sql.Date;
 
 public class Depannage {
     private String intervenant;
-    private Date date;
+    private String date;
     private String lieu;
     private String nomClient;
     private String adresseClient;
@@ -18,7 +18,7 @@ public class Depannage {
     private String description;
     private int prix;
 
-    public Depannage(String intervenant,Date date, String lieu, String nomClient, String adresseClient, String telephoneClient, String titre, String ordinateur, String description, int prix){
+    public Depannage(String intervenant, String date, String lieu, String nomClient, String adresseClient, String telephoneClient, String titre, String ordinateur, String description, int prix){
         this.intervenant = intervenant;
         this.date = date;
         this.lieu = lieu;
@@ -35,7 +35,7 @@ public class Depannage {
         return intervenant;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
@@ -73,7 +73,7 @@ public class Depannage {
         this.intervenant = intervenant;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
