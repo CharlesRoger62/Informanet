@@ -3,7 +3,7 @@ package charlesroger.informanet;
 import java.sql.Date;
 
 /**
- * Created by charles on 10/07/2018.
+ * Created by Charles Roger on 10/07/2018.
  */
 
 public class Depannage {
@@ -14,10 +14,11 @@ public class Depannage {
     private String adresseClient;
     private String telephoneClient;
     private String titre;
+    private String ordinateur;
     private String description;
     private int prix;
 
-    public Depannage(String intervenant,Date date, String lieu, String nomClient, String adresseClient, String telephoneClient, String titre, String description, int prix){
+    public Depannage(String intervenant,Date date, String lieu, String nomClient, String adresseClient, String telephoneClient, String titre, String ordinateur, String description, int prix){
         this.intervenant = intervenant;
         this.date = date;
         this.lieu = lieu;
@@ -25,6 +26,7 @@ public class Depannage {
         this.adresseClient = adresseClient;
         this.telephoneClient = telephoneClient;
         this.titre = titre;
+        this.ordinateur = ordinateur;
         this.description = description;
         this.prix = prix;
     }
@@ -32,9 +34,11 @@ public class Depannage {
     public String getIntervenant() {
         return intervenant;
     }
+
     public Date getDate() {
         return date;
     }
+
     public String getLieu() {
         return lieu;
     }
@@ -54,6 +58,8 @@ public class Depannage {
     public String getTitre() {
         return titre;
     }
+
+    public String getOrdinateur() { return ordinateur; }
 
     public String getDescription() {
         return description;
@@ -83,13 +89,13 @@ public class Depannage {
         this.adresseClient = adresseClient;
     }
 
-    public void setTelephoneClient(String telephoneClient) {
-        this.telephoneClient = telephoneClient;
-    }
+    public void setTelephoneClient(String telephoneClient) { this.telephoneClient = telephoneClient; }
 
     public void setTitre(String titre) {
         this.titre = titre;
     }
+
+    public void setOrdinateur(String ordinateur) { this.ordinateur = ordinateur; }
 
     public void setDescription(String description) {
         this.description = description;
