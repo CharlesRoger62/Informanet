@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="charlesroger.informanet.MainActivity">
+    tools:context="charlesroger.informanet.DepannageList">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbar"
@@ -15,17 +15,30 @@
         android:paddingTop="@dimen/appbar_padding_top"
         android:theme="@style/AppTheme.AppBarOverlay">
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tabs"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:layout_weight="1"
-            android:background="?attr/colorPrimary"
-            app:layout_scrollFlags="scroll|enterAlways"
-            app:popupTheme="@style/AppTheme.PopupOverlay"
-            app:title="@string/app_name">
+            android:layout_height="match_parent"
+            android:layout_weight="1">
 
-        </android.support.v7.widget.Toolbar>
+            <android.support.design.widget.TabItem
+                android:id="@+id/tab1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="A Faire" />
+
+            <android.support.design.widget.TabItem
+                android:id="@+id/tab2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="En cours" />
+
+            <android.support.design.widget.TabItem
+                android:id="@+id/tab3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Termine" />
+        </android.support.design.widget.TabLayout>
 
     </android.support.design.widget.AppBarLayout>
 
@@ -41,6 +54,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
         android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
+        app:backgroundTint="@android:color/holo_red_dark"
+        app:srcCompat="@android:drawable/ic_dialog_alert" />
 
 </android.support.design.widget.CoordinatorLayout>

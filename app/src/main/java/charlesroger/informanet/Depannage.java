@@ -7,6 +7,7 @@ import java.sql.Date;
  */
 
 public class Depannage {
+    private String id;
     private String intervenant;
     private String date;
     private String lieu;
@@ -18,7 +19,8 @@ public class Depannage {
     private String description;
     private int prix;
 
-    public Depannage(String intervenant, String date, String lieu, String nomClient, String adresseClient, String telephoneClient, String titre, String ordinateur, String description, int prix){
+    public Depannage(String id, String intervenant, String date, String lieu, String nomClient, String adresseClient, String telephoneClient, String titre, String ordinateur, String description, int prix){
+        this.id = id;
         this.intervenant = intervenant;
         this.date = date;
         this.lieu = lieu;
@@ -30,6 +32,8 @@ public class Depannage {
         this.description = description;
         this.prix = prix;
     }
+
+    public  String getId(){return id;}
 
     public String getIntervenant() {
         return intervenant;

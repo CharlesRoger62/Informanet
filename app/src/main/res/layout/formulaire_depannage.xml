@@ -13,7 +13,7 @@
         tools:context="">
 
         <EditText
-            android:id="@+id/editAuthor"
+            android:id="@+id/editNameClient"
             android:layout_width="220dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
@@ -28,7 +28,7 @@
             app:layout_constraintTop_toTopOf="@+id/textView3" />
 
         <EditText
-            android:id="@+id/editTitle"
+            android:id="@+id/editAdresseClient"
             android:layout_width="220dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
@@ -101,7 +101,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
         <EditText
-            android:id="@+id/editTelephone"
+            android:id="@+id/editTelephoneClient"
             android:layout_width="wrap_content"
             android:layout_height="44dp"
             android:layout_marginEnd="8dp"
@@ -113,7 +113,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.444"
             app:layout_constraintStart_toEndOf="@+id/textView5"
-            app:layout_constraintTop_toBottomOf="@+id/editTitle"
+            app:layout_constraintTop_toBottomOf="@+id/editAdresseClient"
             app:layout_constraintVertical_bias="1.0" />
 
         <EditText
@@ -128,10 +128,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.444"
             app:layout_constraintStart_toEndOf="@+id/textView"
-            app:layout_constraintTop_toBottomOf="@+id/editTelephone" />
+            app:layout_constraintTop_toBottomOf="@+id/editTelephoneClient" />
 
         <EditText
-            android:id="@+id/editText3"
+            android:id="@+id/editDescription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
@@ -146,8 +146,8 @@
 
         <TextView
             android:id="@+id/textView6"
-            android:layout_width="82dp"
-            android:layout_height="26dp"
+            android:layout_width="94dp"
+            android:layout_height="23dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="28dp"
             android:text="Description :"
@@ -160,11 +160,34 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="36dp"
+            android:layout_marginTop="20dp"
             android:text="Sauvegarder"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editText3" />
+            app:layout_constraintTop_toBottomOf="@+id/editOrdinateur" />
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="97dp"
+            android:layout_height="23dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="28dp"
+            android:text="Ordinateur :"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView6" />
+
+        <EditText
+            android:id="@+id/editOrdinateur"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textView8"
+            app:layout_constraintTop_toBottomOf="@+id/editDescription" />
 
     </android.support.constraint.ConstraintLayout>
 
