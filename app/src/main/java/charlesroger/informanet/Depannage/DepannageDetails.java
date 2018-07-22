@@ -1,4 +1,4 @@
-package charlesroger.informanet;
+package charlesroger.informanet.Depannage;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +11,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import charlesroger.informanet.R;
 
 /**
  * Created by Charles Roger on 11/07/2018.

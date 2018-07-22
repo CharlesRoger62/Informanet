@@ -1,4 +1,4 @@
-package charlesroger.informanet;
+package charlesroger.informanet.Login;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,6 +14,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+
+import charlesroger.informanet.R;
 
 /**
  * Created by user on 16/07/2018.

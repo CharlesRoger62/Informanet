@@ -1,13 +1,14 @@
-package charlesroger.informanet;
+package charlesroger.informanet.Depannage;
 
 import android.content.Context;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.List;
+
+import charlesroger.informanet.R;
 
 /**
  * Created by Charles Roger on 13/07/2018.

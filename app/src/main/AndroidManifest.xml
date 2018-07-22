@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name=".Login.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -21,23 +21,23 @@
         </activity>
 
         <activity
-            android:name=".OublieIdentifiant"
+            android:name=".Login.OublieIdentifiant"
             android:configChanges="orientation"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".DepannageSaisie"
+            android:name=".Depannage.DepannageSaisie"
             android:configChanges="orientation"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".DepannageList"
+            android:name=".Depannage.DepannageList"
             android:configChanges="orientation"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".NewUser"
+            android:name=".Login.NewUser"
             android:configChanges="orientation"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".DepannageDetails"
+            android:name=".Depannage.DepannageDetails"
             android:configChanges="orientation"
             android:screenOrientation="portrait" />
         <activity

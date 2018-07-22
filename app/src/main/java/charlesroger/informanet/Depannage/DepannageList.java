@@ -1,4 +1,4 @@
-package charlesroger.informanet;
+package charlesroger.informanet.Depannage;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -23,7 +23,10 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-import static charlesroger.informanet.DepannagePreviewFragment.NEW_WORD_ACTIVITY_REQUEST_CODE;
+import charlesroger.informanet.CompteOptions;
+import charlesroger.informanet.Login.MainActivity;
+import charlesroger.informanet.R;
+import charlesroger.informanet.Utilisateur;
 
 /**
  * Created by Charles Roger on 14/07/2018.

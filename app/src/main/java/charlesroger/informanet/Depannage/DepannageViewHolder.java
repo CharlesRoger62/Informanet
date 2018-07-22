@@ -1,9 +1,11 @@
-package charlesroger.informanet;
+package charlesroger.informanet.Depannage;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import charlesroger.informanet.R;
 
 /**
  * Created by Charles Roger on 13/07/2018.

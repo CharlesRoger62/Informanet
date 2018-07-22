@@ -1,4 +1,4 @@
-package charlesroger.informanet;
+package charlesroger.informanet.Depannage;
 
 import java.sql.Date;
 

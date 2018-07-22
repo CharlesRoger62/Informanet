@@ -1,4 +1,4 @@
-package charlesroger.informanet;
+package charlesroger.informanet.Login;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +12,8 @@ import android.widget.EditText;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+
+import charlesroger.informanet.R;
 
 /**
  * Created by Charles Roger on 13/07/2018.

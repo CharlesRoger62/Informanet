@@ -1,4 +1,4 @@
-package charlesroger.informanet;
+package charlesroger.informanet.Depannage;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,6 +14,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.UUID;
+
+import charlesroger.informanet.R;
 
 /**
  * Created by Charles Roger on 11/07/2018.
