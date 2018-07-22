@@ -63,7 +63,7 @@ public class DepannageAdapter extends RecyclerView.Adapter<DepannageViewHolder> 
         //holder.getIcon().setImageResource(R.drawable.emergency1);
 
 
-       /* holder.getForward().setOnClickListener(new View.OnClickListener() {
+       /*holder.getForward().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Incident incident = incidentList.get(position);

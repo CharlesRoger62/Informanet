@@ -21,6 +21,13 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     /**
@@ -40,6 +47,23 @@ public class MainActivity extends AppCompatActivity {
         final EditText editEmail = findViewById(R.id.editEmail);
         final EditText editPassword = findViewById(R.id.editPassword);
 
+        final ArrayList listUtilisateur = new ArrayList<Utilisateur>();
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        final DatabaseReference myRef = database.getReference().child("Utilisateurs");
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot datasnapshotUser : dataSnapshot.getChildren()) {
+                    Utilisateur utilisateur = datasnapshotUser.getValue(Utilisateur.class);
+                    listUtilisateur.add(utilisateur);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+        });
+
         connexionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -56,18 +80,37 @@ public class MainActivity extends AppCompatActivity {
                                     // Sign in success, update UI with the signed-in user's information
                                     Log.d(TAG, "signInWithEmail:success");
                                     FirebaseUser user = mAuth.getCurrentUser();
-                                    Intent intent = new Intent(MainActivity.this, DepannageList.class);
-                                    startActivity(intent);
+                                    Integer count = 0;
+                                    String myEmail = user.getEmail();
+                                    for(Object object : listUtilisateur){
+                                        Utilisateur utilisateur = (Utilisateur) object;
+                                        String utilisateurEmail = utilisateur.getEmail();
+                                        if( utilisateurEmail.equals(myEmail)) {
+                                            Intent intent = new Intent(MainActivity.this, DepannageList.class);
+                                            startActivity(intent);
+                                            intent.putExtra("UtilisateurNom",utilisateur.getNom());
+                                            intent.putExtra("UtilisateurSociete",utilisateur.getSociete());
+                                            intent.putExtra("UtilisateurTelephone",utilisateur.getTelephone());
+                                            count++;
+                                            break;
+                                        }
+                                    }
+                                    if ( count == 0) {
+                                        Utilisateur newUtilisateur = new Utilisateur("A completer", "A completer", "A completer", mAuth.getCurrentUser().getEmail());
+                                        myRef.child(mAuth.getCurrentUser().getEmail()).setValue(newUtilisateur);
+                                        Intent intent = new Intent(MainActivity.this, DepannageList.class);
+                                        startActivity(intent);
+                                    }
                                 } else {
                                     // If sign in fails, display a message to the user.
                                     Log.w(TAG, "signInWithEmail:failure", task.getException());
                                     Toast.makeText(MainActivity.this, "Authentication failed.",
                                             Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(MainActivity.this,MainActivity.class);
+                                    startActivity(intent);
                                 }
                             }
                         });
-                Intent intent = new Intent(MainActivity.this,DepannageSaisie.class);
-                startActivity(intent);
             }
         });
         final TextView mdpOublie = findViewById(R.id.textViewMdpOubli);
@@ -79,27 +122,14 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intentOublie);
             }
         });
-    }
+        final Button inscriptionButton = findViewById(R.id.InscriptionButton);
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
+        inscriptionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, NewUser.class);
+                startActivity(intent);
+            }
+        });
     }
 }

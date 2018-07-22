@@ -1,10 +1,8 @@
 package charlesroger.informanet;
 
 import android.content.Intent;
-import android.nfc.Tag;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -28,8 +26,8 @@ public class OublieIdentifiant extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forgotten);
 
-        final EditText emailEdit = findViewById(R.id.editEmailForgotten);
-        final Button envoyer = findViewById(R.id.buttonSendForgottenMDP);
+        final EditText emailEdit = findViewById(R.id.editNewEmail);
+        final Button envoyer = findViewById(R.id.buttonSendNewUser);
 
         envoyer.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -2,6 +2,7 @@ package charlesroger.informanet;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -9,10 +10,18 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 import static charlesroger.informanet.DepannagePreviewFragment.NEW_WORD_ACTIVITY_REQUEST_CODE;
 
@@ -31,6 +40,8 @@ public class DepannageList extends AppCompatActivity {
      * {@link android.support.v4.app.FragmentStatePagerAdapter}.
      */
     private SectionsPagerAdapter mSectionsPagerAdapter;
+    final ArrayList listUtilisateur = new ArrayList();
+
 
     /**
      * The {@link ViewPager} that will host the section contents.
@@ -44,6 +55,8 @@ public class DepannageList extends AppCompatActivity {
 
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
+        //DepannageViewModel dvm = ViewModelProviders.of(this).get(IncidentViewModel.class);
+
         //mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager(), ivm);
 
         // Set up the ViewPager with the sections adapter.
@@ -68,11 +81,25 @@ public class DepannageList extends AppCompatActivity {
 
     }
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_depannage_list, menu);
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        final DatabaseReference myRef = database.getReference().child("Utilisateurs");
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot datasnapshotUser : dataSnapshot.getChildren()) {
+                    Utilisateur utilisateur = datasnapshotUser.getValue(Utilisateur.class);
+                    listUtilisateur.add(utilisateur);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+        });
         return true;
     }
 
@@ -81,14 +108,20 @@ public class DepannageList extends AppCompatActivity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        switch(item.getItemId()){
+            case R.id.action_deconnexion:
+                FirebaseAuth.getInstance().signOut();
+                Intent intent = new Intent(DepannageList.this,MainActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.actionMonCompte:
+                Intent intent1 = new Intent(DepannageList.this,CompteOptions.class);
+                startActivity(intent1);
+                intent1.putExtra("UtilisateurNom",getIntent().getExtras().getString("UtilisateurNom"));
+                intent1.putExtra("UtilisateurSociete",getIntent().getExtras().getString("UtilisateurSociete"));
+                intent1.putExtra("UtilisateurEmail",getIntent().getExtras().getString("UtilisateurEmail"));
         }
-
-        return super.onOptionsItemSelected(item);
+        return true;
     }
 
     /**
