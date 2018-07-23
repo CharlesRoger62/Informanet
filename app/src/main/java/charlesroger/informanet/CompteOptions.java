@@ -20,7 +20,7 @@ import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 
-import charlesroger.informanet.Depannage.DepannageList;
+import charlesroger.informanet.DepannagePackage.DepannageList;
 
 /**
  * Created by Charles Roger on 16/07/2018.
@@ -78,7 +78,6 @@ public class CompteOptions extends AppCompatActivity {
                         myUtilisateur.setSociete(user.getSociete());
                         myUtilisateur.setNom(user.getNom());
                         myUtilisateur.setTelephone(user.getTelephone());
-                        myUtilisateur.setEmail(user.getEmail());
                     }
                 }
                 Utilisateur modifUtilisateur = new Utilisateur(myUtilisateur.getNom(),myUtilisateur.getSociete(),myUtilisateur.getTelephone(),myUtilisateur.getEmail());
@@ -86,8 +85,9 @@ public class CompteOptions extends AppCompatActivity {
                 modifUtilisateur.setSociete(editCompteSociete.getText().toString());
                 modifUtilisateur.setTelephone(editCompteTelephone.getText().toString());
 
+                FirebaseAuth mAuth = FirebaseAuth.getInstance();
                 FirebaseDatabase myData = FirebaseDatabase.getInstance();
-                DatabaseReference myRef = myData.getReference().child("Utilisateurs").child(modifUtilisateur.getEmail());
+                DatabaseReference myRef = myData.getReference().child("Utilisateurs").child(mAuth.getCurrentUser().getUid());
                 myRef.setValue(modifUtilisateur);
 
                 Intent intent = new Intent(CompteOptions.this, DepannageList.class);

@@ -1,4 +1,4 @@
-package charlesroger.informanet.Depannage;
+package charlesroger.informanet.DepannagePackage;
 
 import android.content.Intent;
 import android.os.Bundle;

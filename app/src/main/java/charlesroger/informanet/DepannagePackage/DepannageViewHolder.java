@@ -1,4 +1,4 @@
-package charlesroger.informanet.Depannage;
+package charlesroger.informanet.DepannagePackage;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -15,22 +15,20 @@ public class DepannageViewHolder extends RecyclerView.ViewHolder {
 
         final TextView date;
         final TextView title;
-        final ImageView icon;
+        final ImageView avatar;
+        final TextView description;
 
 
     public DepannageViewHolder(View view) {
             super(view);
             this.date = view.findViewById(R.id.cardDate);
             this.title = view.findViewById(R.id.cardDescription);
-            this.icon = view.findViewById(R.id.icon);
+            this.avatar = view.findViewById(R.id.icon);
+            this.description = view.findViewById(R.id.cardDescription);
 
         }
 
-    public TextView getDate() {
-        return date;
-    }
-
-    public void bind(final Depannage depannage, final DepannageAdapter.OnItemClickListener shortListener, final DepannageAdapter.OnItemLongClickListener longListener) {
+    public void bindData(final Depannage depannage, final DepannageAdapter.OnItemClickListener shortListener, final DepannageAdapter.OnItemLongClickListener longListener) {
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -47,7 +45,9 @@ public class DepannageViewHolder extends RecyclerView.ViewHolder {
     public TextView getTitle() {
         return title;
     }
-    public ImageView getIcon() {
-        return icon;
+    public ImageView getAvatar() {
+        return avatar;
     }
+    public TextView getDescription(){return description;}
+    public TextView getDate() {return date;}
 }

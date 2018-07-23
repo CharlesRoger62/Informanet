@@ -1,4 +1,4 @@
-package charlesroger.informanet.Depannage;
+package charlesroger.informanet.DepannagePackage;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -65,7 +65,7 @@ public class DepannagePreviewFragment  extends Fragment {
         final IncidentAdapter adapter = new IncidentAdapter(incidentList);
         RecyclerView recyclerView = view.findViewById(R.id.incidentView);
         recyclerView.setAdapter(adapter);*/
-        final RecyclerView recyclerView = view.findViewById(R.id.incidentView);
+        final RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
         final DepannageAdapter adapter = new DepannageAdapter(getContext(), new DepannageAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(Depannage depannage) {

@@ -25,11 +25,11 @@
             android:configChanges="orientation"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Depannage.DepannageSaisie"
+            android:name=".DepannagePackage.DepannageSaisie"
             android:configChanges="orientation"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Depannage.DepannageList"
+            android:name=".DepannagePackage.DepannageList"
             android:configChanges="orientation"
             android:screenOrientation="portrait"/>
         <activity
@@ -37,7 +37,7 @@
             android:configChanges="orientation"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Depannage.DepannageDetails"
+            android:name=".DepannagePackage.DepannageDetails"
             android:configChanges="orientation"
             android:screenOrientation="portrait" />
         <activity

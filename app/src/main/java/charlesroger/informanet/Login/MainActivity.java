@@ -27,7 +27,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-import charlesroger.informanet.Depannage.DepannageList;
+import charlesroger.informanet.DepannagePackage.DepannageList;
 import charlesroger.informanet.R;
 import charlesroger.informanet.Utilisateur;
 
@@ -89,18 +89,21 @@ public class MainActivity extends AppCompatActivity {
                                         String utilisateurEmail = utilisateur.getEmail();
                                         if( utilisateurEmail.equals(myEmail)) {
                                             Intent intent = new Intent(MainActivity.this, DepannageList.class);
-                                            startActivity(intent);
                                             intent.putExtra("UtilisateurNom",utilisateur.getNom());
                                             intent.putExtra("UtilisateurSociete",utilisateur.getSociete());
                                             intent.putExtra("UtilisateurTelephone",utilisateur.getTelephone());
+                                            startActivity(intent);
                                             count++;
                                             break;
                                         }
                                     }
                                     if ( count == 0) {
                                         Utilisateur newUtilisateur = new Utilisateur("A completer", "A completer", "A completer", mAuth.getCurrentUser().getEmail());
-                                        myRef.child(mAuth.getCurrentUser().getEmail()).setValue(newUtilisateur);
+                                        myRef.child(mAuth.getCurrentUser().getUid()).setValue(newUtilisateur);
                                         Intent intent = new Intent(MainActivity.this, DepannageList.class);
+                                        intent.putExtra("UtilisateurNom",newUtilisateur.getNom());
+                                        intent.putExtra("UtilisateurSociete",newUtilisateur.getSociete());
+                                        intent.putExtra("UtilisateurTelephone",newUtilisateur.getTelephone());
                                         startActivity(intent);
                                     }
                                 } else {

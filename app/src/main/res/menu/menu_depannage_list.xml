@@ -1,7 +1,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="charlesroger.informanet.Depannage.DepannageList">
+    tools:context="charlesroger.informanet.DepannagePackage.DepannageList">
     <item
         android:id="@+id/actionMonCompte"
         android:title="Mon Compte" />

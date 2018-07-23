@@ -1,6 +1,4 @@
-package charlesroger.informanet.Depannage;
-
-import java.sql.Date;
+package charlesroger.informanet.DepannagePackage;
 
 /**
  * Created by Charles Roger on 10/07/2018.

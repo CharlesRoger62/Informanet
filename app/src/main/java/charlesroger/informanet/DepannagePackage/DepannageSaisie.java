@@ -1,4 +1,4 @@
-package charlesroger.informanet.Depannage;
+package charlesroger.informanet.DepannagePackage;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +9,7 @@ import android.widget.EditText;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.onesignal.OneSignal;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -29,6 +30,12 @@ public class DepannageSaisie extends AppCompatActivity {
     protected  void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.formulaire_depannage);
+
+        // OneSignal Initialization
+        OneSignal.startInit(this)
+                .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
+                .unsubscribeWhenNotificationsAreDisabled(true)
+                .init();
 
         final Button saveButton = (Button) findViewById(R.id.saveButton);
         final EditText nameClient = findViewById(R.id.editNameClient);

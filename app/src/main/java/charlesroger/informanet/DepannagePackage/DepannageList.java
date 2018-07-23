@@ -1,4 +1,4 @@
-package charlesroger.informanet.Depannage;
+package charlesroger.informanet.DepannagePackage;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +10,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,11 +24,14 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import charlesroger.informanet.CompteOptions;
 import charlesroger.informanet.Login.MainActivity;
 import charlesroger.informanet.R;
 import charlesroger.informanet.Utilisateur;
+
+import static java.security.AccessController.getContext;
 
 /**
  * Created by Charles Roger on 14/07/2018.
@@ -58,9 +63,15 @@ public class DepannageList extends AppCompatActivity {
 
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
-        //DepannageViewModel dvm = ViewModelProviders.of(this).get(IncidentViewModel.class);
 
-        //mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager(), ivm);
+        /*
+        List<Depannage> DepannageList = generateDepannageList();
+        DepannageAdapter adapter = new DepannageAdapter(getContext(), );
+        RecyclerView recyclerView = (RecyclerView)findViewById(R.id.recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setHasFixedSize(true);
+
+        recyclerView.setAdapter(adapter);
 
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
@@ -71,6 +82,8 @@ public class DepannageList extends AppCompatActivity {
 
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
+
+        */
 
         FloatingActionButton create = findViewById(R.id.fab);
 
@@ -108,6 +121,15 @@ public class DepannageList extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        Bundle extras = getIntent().getExtras();
+        String utilisateurNom = "null";
+        String utilisateurSociete = "null";
+        String utilisateurTelephone = "null";
+        if ( extras != null) {
+            utilisateurNom = extras.getString("UtilisateurNom");
+            utilisateurSociete = extras.getString("UtilisateurSociete");
+            utilisateurTelephone = extras.getString("UtilisateurTelephone");
+        }
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
@@ -119,10 +141,10 @@ public class DepannageList extends AppCompatActivity {
                 break;
             case R.id.actionMonCompte:
                 Intent intent1 = new Intent(DepannageList.this,CompteOptions.class);
+                intent1.putExtra("UtilisateurNom",utilisateurNom);
+                intent1.putExtra("UtilisateurSociete",utilisateurSociete);
+                intent1.putExtra("UtilisateurTelephone",utilisateurTelephone);
                 startActivity(intent1);
-                intent1.putExtra("UtilisateurNom",getIntent().getExtras().getString("UtilisateurNom"));
-                intent1.putExtra("UtilisateurSociete",getIntent().getExtras().getString("UtilisateurSociete"));
-                intent1.putExtra("UtilisateurEmail",getIntent().getExtras().getString("UtilisateurEmail"));
         }
         return true;
     }
@@ -162,5 +184,45 @@ public class DepannageList extends AppCompatActivity {
             // Show 3 total pages.
             return 3;
         }
+    }
+
+    private List<Depannage> generateDepannageList() {
+        final List<Depannage> DepannageList = new ArrayList<>();
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        final DatabaseReference myRef = database.getReference().child("Depannage");
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot datasnapshotUser : dataSnapshot.getChildren()) {
+                    Depannage depannage = datasnapshotUser.getValue(Depannage.class);
+                    DepannageList.add(depannage);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+        });
+        return DepannageList;
+    }
+
+    private List<Utilisateur> generateUtilisateurList() {
+        final List<Utilisateur> UtilisateurList = new ArrayList<>();
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        final DatabaseReference myRef = database.getReference().child("Utilisateur");
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot datasnapshotUser : dataSnapshot.getChildren()) {
+                    Utilisateur utilisateur = datasnapshotUser.getValue(Utilisateur.class);
+                    UtilisateurList.add(utilisateur);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+        });
+        return UtilisateurList;
     }
 }

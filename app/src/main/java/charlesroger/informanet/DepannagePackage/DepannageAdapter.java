@@ -1,4 +1,4 @@
-package charlesroger.informanet.Depannage;
+package charlesroger.informanet.DepannagePackage;
 
 import android.content.Context;
 import android.support.v7.widget.CardView;
@@ -61,24 +61,8 @@ public class DepannageAdapter extends RecyclerView.Adapter<DepannageViewHolder> 
 
         holder.getDate().setText(a.getDate());
         holder.getTitle().setText(a.getTitre());
-        //holder.getIcon().setImageResource(R.drawable.emergency1);
-
-
-       /*holder.getForward().setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Incident incident = incidentList.get(position);
-                System.out.println("Try to forward " + incident);
-                if (incident.getAdvancement() < 3) {
-                    incident.setAdvancement(incident.getAdvancement() + 1);
-                    incidentList.remove(incident);
-                    incident.changeShow();
-                    setIncident(incidentList);
-                    System.out.println("Forward succeed");
-                }
-
-            }
-        });    */
+        //holder.getAvatar().setImageBitmap(a);
+        holder.description.setText(a.getDescription());
 
     }
 
