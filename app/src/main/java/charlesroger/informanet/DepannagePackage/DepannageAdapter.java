@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import charlesroger.informanet.R;
@@ -24,19 +25,15 @@ public class DepannageAdapter extends RecyclerView.Adapter<DepannageViewHolder> 
         boolean onItemLongClick(Depannage depannage);
     }
 
-    private List<Depannage> depannageList;
-    private final LayoutInflater mInflater;
-    private final OnItemClickListener shortListener;
+    private List<DepannageBis> depannageList;
+
     private Context cont;
     private Depannage depannage;
     private int position;
 
-    public DepannageAdapter(Context context, OnItemClickListener shortListener) {
-        mInflater = LayoutInflater.from(context);
-        this.shortListener = shortListener;
-        this.cont = context;
+    public DepannageAdapter(List<DepannageBis> depannageBisList) {
+        this.depannageList = depannageBisList;
     }
-
     @Override
     public int getItemCount() {
         if (depannageList != null)
@@ -55,7 +52,7 @@ public class DepannageAdapter extends RecyclerView.Adapter<DepannageViewHolder> 
     @Override
     public void onBindViewHolder(DepannageViewHolder holder, final int position) {
 
-        Depannage a = depannageList.get(position);
+        DepannageBis a = depannageList.get(position);
         this.position = position;
 
 

@@ -31,6 +31,8 @@ import charlesroger.informanet.DepannagePackage.DepannageList;
 import charlesroger.informanet.R;
 import charlesroger.informanet.Utilisateur;
 
+import static android.provider.AlarmClock.EXTRA_MESSAGE;
+
 public class MainActivity extends AppCompatActivity {
     /**
      * The {@link ViewPager} that will host the section contents.
@@ -46,76 +48,17 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         final Button connexionButton = (Button) findViewById(R.id.buttonConnection);
-        final EditText editEmail = findViewById(R.id.editEmail);
-        final EditText editPassword = findViewById(R.id.editPassword);
 
-        final ArrayList listUtilisateur = new ArrayList<Utilisateur>();
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        final DatabaseReference myRef = database.getReference().child("Utilisateurs");
-        myRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot datasnapshotUser : dataSnapshot.getChildren()) {
-                    Utilisateur utilisateur = datasnapshotUser.getValue(Utilisateur.class);
-                    listUtilisateur.add(utilisateur);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-            }
-        });
 
         connexionButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                String email = editEmail.getText().toString();
-                String password = editPassword.getText().toString();
-                mAuth = FirebaseAuth.getInstance();
+            public void onClick(View view) { // TODO remettre system de login
+                Intent intent = new Intent(getApplicationContext(), DepannageList.class);
+                startActivity(intent);
+
+
 
                 //AuthResult result = mAuth.signInWithEmailAndPassword(email, password).getResult();
-                mAuth.signInWithEmailAndPassword(email, password)
-                        .addOnCompleteListener(MainActivity.this, new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if (task.isSuccessful()) {
-                                    // Sign in success, update UI with the signed-in user's information
-                                    Log.d(TAG, "signInWithEmail:success");
-                                    FirebaseUser user = mAuth.getCurrentUser();
-                                    Integer count = 0;
-                                    String myEmail = user.getEmail();
-                                    for(Object object : listUtilisateur){
-                                        Utilisateur utilisateur = (Utilisateur) object;
-                                        String utilisateurEmail = utilisateur.getEmail();
-                                        if( utilisateurEmail.equals(myEmail)) {
-                                            Intent intent = new Intent(MainActivity.this, DepannageList.class);
-                                            intent.putExtra("UtilisateurNom",utilisateur.getNom());
-                                            intent.putExtra("UtilisateurSociete",utilisateur.getSociete());
-                                            intent.putExtra("UtilisateurTelephone",utilisateur.getTelephone());
-                                            startActivity(intent);
-                                            count++;
-                                            break;
-                                        }
-                                    }
-                                    if ( count == 0) {
-                                        Utilisateur newUtilisateur = new Utilisateur("A completer", "A completer", "A completer", mAuth.getCurrentUser().getEmail());
-                                        myRef.child(mAuth.getCurrentUser().getUid()).setValue(newUtilisateur);
-                                        Intent intent = new Intent(MainActivity.this, DepannageList.class);
-                                        intent.putExtra("UtilisateurNom",newUtilisateur.getNom());
-                                        intent.putExtra("UtilisateurSociete",newUtilisateur.getSociete());
-                                        intent.putExtra("UtilisateurTelephone",newUtilisateur.getTelephone());
-                                        startActivity(intent);
-                                    }
-                                } else {
-                                    // If sign in fails, display a message to the user.
-                                    Log.w(TAG, "signInWithEmail:failure", task.getException());
-                                    Toast.makeText(MainActivity.this, "Authentication failed.",
-                                            Toast.LENGTH_SHORT).show();
-                                    Intent intent = new Intent(MainActivity.this,MainActivity.class);
-                                    startActivity(intent);
-                                }
-                            }
-                        });
             }
         });
         final TextView mdpOublie = findViewById(R.id.textViewMdpOubli);

@@ -66,15 +66,8 @@ public class DepannagePreviewFragment  extends Fragment {
         RecyclerView recyclerView = view.findViewById(R.id.incidentView);
         recyclerView.setAdapter(adapter);*/
         final RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
-        final DepannageAdapter adapter = new DepannageAdapter(getContext(), new DepannageAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(Depannage depannage) {
-                    Intent intent = new Intent(getContext(), DepannageDetails.class);
 
-                    intent.putExtra("Depannage", depannage.getId());
-                    startActivityForResult(intent, 0);
-            }
-        });
+
       //  this.depannageAdapter = adapter;
 
        //  recyclerView.setAdapter(adapter);
