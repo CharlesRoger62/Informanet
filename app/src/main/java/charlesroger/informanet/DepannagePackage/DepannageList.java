@@ -46,7 +46,7 @@ import static java.security.AccessController.getContext;
 public class DepannageList extends AppCompatActivity {
 
     final ArrayList listUtilisateur = new ArrayList();
-    private ArrayList<DepannageBis> depannages;
+    private ArrayList<Depannage> depannages;
     DepannageAdapter mAdapter;
 
 
@@ -58,6 +58,18 @@ public class DepannageList extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        FloatingActionButton create = findViewById(R.id.fab);
+        create.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(DepannageList.this, DepannageSaisie.class);
+                startActivity(intent);
+            }
+        });
+
+
         setContentView(R.layout.fragment_depannage_liste);
         depannages = new ArrayList<>();
 
@@ -70,9 +82,8 @@ public class DepannageList extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                    DepannageBis depannageBis = postSnapshot.getValue(DepannageBis.class);
-                    depannages.add(depannageBis);
-
+                    Depannage depannage = postSnapshot.getValue(Depannage.class);
+                    depannages.add(depannage);
 
 
                 }
@@ -87,33 +98,6 @@ public class DepannageList extends AppCompatActivity {
                 // Log.w(TAG, "Failed to read value.", error.toException());
             }
         });
-
-
-        // Create the adapter that will return a fragment for each of the three
-        // primary sections of the activity.
-
-        /*
-        List<Depannage> DepannageList = generateDepannageList();
-        DepannageAdapter adapter = new DepannageAdapter(getContext(), );
-        RecyclerView recyclerView = (RecyclerView)findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setHasFixedSize(true);
-
-        recyclerView.setAdapter(adapter);
-
-        mViewPager = (ViewPager) findViewById(R.id.container);
-        mViewPager.setAdapter(mSectionsPagerAdapter);
-
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
-        tabLayout.setupWithViewPager(mViewPager);
-
-        mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
-        tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
-
-        */
-
-
-
     }
 
 
@@ -138,6 +122,91 @@ public class DepannageList extends AppCompatActivity {
 
 
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_depannage_list, menu);
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        final DatabaseReference myRef = database.getReference().child("Utilisateurs");
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot datasnapshotUser : dataSnapshot.getChildren()) {
+                    Utilisateur utilisateur = datasnapshotUser.getValue(Utilisateur.class);
+                    listUtilisateur.add(utilisateur);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+        });
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        Bundle extras = getIntent().getExtras();
+        String utilisateurNom = "null";
+        String utilisateurSociete = "null";
+        String utilisateurTelephone = "null";
+        if ( extras != null) {
+            utilisateurNom = extras.getString("UtilisateurNom");
+            utilisateurSociete = extras.getString("UtilisateurSociete");
+            utilisateurTelephone = extras.getString("UtilisateurTelephone");
+        }
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        switch(item.getItemId()){
+            case R.id.action_deconnexion:
+                FirebaseAuth.getInstance().signOut();
+                Intent intent = new Intent(DepannageList.this,MainActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.actionMonCompte:
+                Intent intent1 = new Intent(DepannageList.this,CompteOptions.class);
+                intent1.putExtra("UtilisateurNom",utilisateurNom);
+                intent1.putExtra("UtilisateurSociete",utilisateurSociete);
+                intent1.putExtra("UtilisateurTelephone",utilisateurTelephone);
+                startActivity(intent1);
+        }
+        return true;
+    }
+
+    public class SectionsPagerAdapter extends FragmentPagerAdapter {
+
+        public SectionsPagerAdapter(FragmentManager fm) {
+            super(fm);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            // getItem is called to instantiate the fragment for the given page.
+            // Return a PlaceholderFragment (defined as a static inner class below).
+            return DepannagePreviewFragment.newInstance(position + 1);
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            switch (position) {
+                case 0:
+                    return "A FAIRE";
+                case 1:
+                    return "EN COURS";
+                case 2:
+                    return "FAIT";
+            }
+            return null;
+        }
+
+        @Override
+        public int getCount() {
+            // Show 3 total pages.
+            return 3;
+        }
     }
 
 

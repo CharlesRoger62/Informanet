@@ -25,14 +25,14 @@ public class DepannageAdapter extends RecyclerView.Adapter<DepannageViewHolder> 
         boolean onItemLongClick(Depannage depannage);
     }
 
-    private List<DepannageBis> depannageList;
+    private List<Depannage> depannageList;
 
     private Context cont;
     private Depannage depannage;
     private int position;
 
-    public DepannageAdapter(List<DepannageBis> depannageBisList) {
-        this.depannageList = depannageBisList;
+    public DepannageAdapter(List<Depannage> depannageList) {
+        this.depannageList = depannageList;
     }
     @Override
     public int getItemCount() {
@@ -52,7 +52,7 @@ public class DepannageAdapter extends RecyclerView.Adapter<DepannageViewHolder> 
     @Override
     public void onBindViewHolder(DepannageViewHolder holder, final int position) {
 
-        DepannageBis a = depannageList.get(position);
+        Depannage a = depannageList.get(position);
         this.position = position;
 
 

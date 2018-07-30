@@ -16,6 +16,7 @@ public class Depannage {
     private String ordinateur;
     private String description;
     private String prix;
+   // private String statut;
 
     public Depannage(String id, String intervenant, String date, String lieu, String nomClient, String adresseClient, String telephoneClient, String titre, String ordinateur, String description, int prix){
         this.id = id;
@@ -29,7 +30,10 @@ public class Depannage {
         this.ordinateur = ordinateur;
         this.description = description;
         this.prix =String.valueOf( prix);
+       // this.statut = statut;
     }
+
+    public Depannage(){}
 
     public  String getId(){return id;}
 

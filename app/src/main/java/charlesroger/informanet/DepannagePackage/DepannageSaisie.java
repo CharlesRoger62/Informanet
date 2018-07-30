@@ -52,7 +52,7 @@ public class DepannageSaisie extends AppCompatActivity {
 
                 // Permet de récupérer la date actuelle
                 Date currentTime = Calendar.getInstance().getTime();
-                SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
+                SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
                 String formattedDate = df.format(currentTime);
 
                 //Récupération des champs remplies par l'utilisateur

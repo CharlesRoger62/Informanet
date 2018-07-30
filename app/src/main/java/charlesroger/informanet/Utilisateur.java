@@ -1,8 +1,5 @@
 package charlesroger.informanet;
 
-import com.google.firebase.auth.FirebaseUser;
-
-
 /**
  * Created by Charles Roger on 16/07/2018.
  */
@@ -21,7 +18,6 @@ public class Utilisateur {
     }
 
     public Utilisateur(){
-
     }
 
     public String getNom() {
@@ -33,25 +29,20 @@ public class Utilisateur {
     public String getSociete() {
         return societe;
     }
-
     public String getTelephone() {
         return telephone;
     }
+    //public byte[] getAvatar() {return avatar;}
 
-
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
-
+    public void setNom(String nom) {this.nom = nom;}
     public void setSociete(String societe) {
         this.societe = societe;
     }
-
     public void setTelephone(String telephone) {
         this.telephone = telephone;
     }
-
     public void setEmail(String email) {
         this.email = email;
     }
+    //public void setAvatar(byte[] avatar) {this.avatar = avatar;}
 }
